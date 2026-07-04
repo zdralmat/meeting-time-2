@@ -18,8 +18,9 @@ type TopTenRow = {
 
 const app = new Hono<{ Bindings: Env }>()
 
-// Allow requests from any origin (restrict to your GitHub Pages URL in production)
-app.use('/api/*', cors())
+app.use('/api/*', cors({
+  origin: ['https://zdralmat.github.io', 'http://localhost:3000'],
+}))
 
 // POST /api/availability
 // Body: { name: string, days: string[] }
