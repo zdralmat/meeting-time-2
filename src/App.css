@@ -319,9 +319,24 @@ body {
   font-size: 0.72rem;
   color: #a0aec0;
   margin-top: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.voters-toggle {
+  background: none;
+  border: none;
+  color: #4299e1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0 3px;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+.voters-toggle:hover {
+  color: #2b6cb0;
 }
 
 .top-ten-votes {

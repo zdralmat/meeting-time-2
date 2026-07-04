@@ -12,6 +12,33 @@ function formatDate(dateStr) {
   return `${DAY_NAMES[d.getDay()]} ${day}. ${MONTH_SHORT[month - 1]}`;
 }
 
+const SHOW = 2;
+
+function VotersList({ voters }) {
+  const [expanded, setExpanded] = useState(false);
+  const names = voters ? voters.split(', ') : [];
+  if (names.length === 0) return null;
+
+  const hidden = names.length - SHOW;
+  const visible = expanded ? names : names.slice(0, SHOW);
+
+  return (
+    <div className="top-ten-voters">
+      {visible.join(', ')}
+      {!expanded && hidden > 0 && (
+        <button className="voters-toggle" onClick={() => setExpanded(true)}>
+          +{hidden}
+        </button>
+      )}
+      {expanded && (
+        <button className="voters-toggle" onClick={() => setExpanded(false)}>
+          −
+        </button>
+      )}
+    </div>
+  );
+}
+
 export default function TopTen({ refreshKey = 0 }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,7 +86,7 @@ export default function TopTen({ refreshKey = 0 }) {
                     style={{ width: `${(votes / maxVotes) * 100}%` }}
                   />
                 </div>
-                {voters && <div className="top-ten-voters">{voters}</div>}
+                {voters && <VotersList voters={voters} />}
               </div>
               <span className="top-ten-votes">{votes}</span>
             </li>
