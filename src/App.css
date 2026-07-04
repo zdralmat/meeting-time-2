@@ -1,0 +1,408 @@
+/* src/App.css */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+  background: #edf2f7;
+  color: #1a202c;
+  min-height: 100vh;
+}
+
+/* ── Layout ── */
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.app-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #2c5282;
+  letter-spacing: -0.5px;
+}
+
+.app-header .subtitle {
+  margin-top: 6px;
+  color: #718096;
+  font-size: 1rem;
+}
+
+/* ── Name form ── */
+.name-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.name-input {
+  padding: 10px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  width: 280px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.name-input:focus {
+  border-color: #4299e1;
+}
+
+.btn-primary {
+  padding: 10px 24px;
+  background: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+  background: #3182ce;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.status-msg {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  min-height: 1.5em;
+}
+
+.status-msg.active {
+  color: #2b6cb0;
+  font-weight: 500;
+}
+
+.status-msg.hint {
+  color: #a0aec0;
+}
+
+/* ── Main layout ── */
+.main-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.calendar-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.top-ten-section {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+/* ── Card ── */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Calendar ── */
+.calendar-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.nav-btn {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a5568;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.nav-btn:hover {
+  background: #ebf8ff;
+  border-color: #4299e1;
+  color: #2b6cb0;
+}
+
+.months-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.month-calendar {
+  flex: 1;
+  min-width: 210px;
+}
+
+.month-title {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 12px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.day-header {
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #a0aec0;
+  padding: 4px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, transform 0.1s;
+  user-select: none;
+}
+
+.day-cell.empty {
+  cursor: default;
+}
+
+.day-cell:not(.empty):not(.past):not(.selected):not(.disabled):hover {
+  background: #ebf8ff;
+  color: #2b6cb0;
+}
+
+/* Selected = available */
+.day-cell.selected {
+  background: #48bb78;
+  color: white;
+  font-weight: 700;
+}
+
+.day-cell.selected:not(.disabled):hover {
+  background: #38a169;
+}
+
+/* Today outline */
+.day-cell.today:not(.selected) {
+  outline: 2px solid #4299e1;
+  outline-offset: -2px;
+  font-weight: 700;
+  color: #2b6cb0;
+}
+
+/* Past days */
+.day-cell.past {
+  color: #cbd5e0;
+  cursor: default;
+}
+
+/* Weekends */
+.day-cell.weekend:not(.past):not(.selected) {
+  color: #c05621;
+}
+
+/* Locked until name is entered */
+.day-cell.disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* ── Top Ten ── */
+.top-ten-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #2d3748;
+  margin-bottom: 2px;
+}
+
+.top-ten-subtitle {
+  font-size: 0.78rem;
+  color: #a0aec0;
+  margin-bottom: 16px;
+}
+
+.top-ten-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.top-ten-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rank {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #a0aec0;
+  width: 18px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.top-ten-item:nth-child(1) .rank { color: #d69e2e; font-size: 0.85rem; }
+.top-ten-item:nth-child(2) .rank { color: #718096; font-size: 0.8rem; }
+.top-ten-item:nth-child(3) .rank { color: #9c4221; font-size: 0.78rem; }
+
+.top-ten-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.top-ten-date {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2d3748;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-ten-bar-bg {
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  margin-top: 4px;
+}
+
+.top-ten-bar {
+  height: 100%;
+  border-radius: 2px;
+  background: #4299e1;
+  transition: width 0.4s ease;
+}
+
+.top-ten-item:nth-child(1) .top-ten-bar { background: #d69e2e; }
+.top-ten-item:nth-child(2) .top-ten-bar { background: #718096; }
+.top-ten-item:nth-child(3) .top-ten-bar { background: #9c4221; }
+
+.top-ten-voters {
+  font-size: 0.72rem;
+  color: #a0aec0;
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-ten-votes {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #718096;
+  flex-shrink: 0;
+}
+
+.top-ten-state {
+  font-size: 0.85rem;
+  color: #a0aec0;
+  margin-top: 8px;
+}
+
+.top-ten-state.error {
+  color: #e53e3e;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .top-ten-section {
+    width: 100%;
+  }
+
+  .app {
+    padding: 20px 12px;
+  }
+}
+
+/* ── Submit area ── */
+.submit-area {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.selected-count {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #718096;
+}
+
+.btn-send {
+  padding: 11px 28px;
+  background: #48bb78;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.btn-send:hover:not(:disabled) {
+  background: #38a169;
+}
+
+.btn-send:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btn-send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.send-feedback {
+  width: 100%;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.send-feedback.success { color: #38a169; }
+.send-feedback.error   { color: #e53e3e; }

@@ -1,0 +1,20 @@
+# Závislosti
+node_modules/
+worker/node_modules/
+
+# Build output (commitujeme docs/ záměrně pro GitHub Pages)
+dist/
+
+# Lokální secrets — NIKDY nedávat na git
+.dev.vars
+worker/.dev.vars
+.env
+worker/.env
+
+# Wrangler cache
+.wrangler/
+worker/.wrangler/
+
+# OS
+.DS_Store
+Thumbs.db

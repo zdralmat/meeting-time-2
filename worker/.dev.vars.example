@@ -1,0 +1,6 @@
+# Lokální proměnné pro `wrangler dev`
+# Zkopíruj tento soubor jako .dev.vars a vyplň hodnoty
+# NIKDY necommituj .dev.vars na git!
+
+# Příklad vlastního secretu (pokud ho přidáš do workeru):
+# MY_SECRET=hodnota
